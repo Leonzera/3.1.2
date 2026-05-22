@@ -25,7 +25,14 @@ public class User implements UserDetails {
     private String password;
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    public User(String username, String password, String email, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),

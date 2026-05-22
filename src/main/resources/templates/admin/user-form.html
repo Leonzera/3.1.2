@@ -14,19 +14,27 @@
         <label>Логин: <input type="text" th:field="*{user.username}" required></label>
     </div>
     <div>
-        <label>Пароль: <input type="password" th:field="*{user.password}" required></label>
+        <label>Пароль: <input type="password" th:field="*{user.password}"
+                              th:required="${user.id == null}"
+                              ></label>
     </div>
     <div>
         <label>Email: <input type="email" th:field="*{user.email}" required></label>
     </div>
 
 
-    <!-- Выбор роли -->
     <div>
         <label>Роль:
             <select name="roleName">
-                <option value="ROLE_USER">USER</option>
-                <option value="ROLE_ADMIN">ADMIN</option>
+                <option value="ROLE_USER"
+                        th:selected="${user.roles != null and !user.roles.isEmpty() and user.roles.iterator().next().name == 'ROLE_USER'}">
+                    User
+                </option>
+
+                <option value="ROLE_ADMIN"
+                        th:selected="${user.roles != null and !user.roles.isEmpty() and user.roles.iterator().next().name == 'ROLE_ADMIN'}">
+                    Admin
+                </option>
             </select>
         </label>
     </div>
